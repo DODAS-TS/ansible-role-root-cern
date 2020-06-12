@@ -4,7 +4,7 @@ cern_root_dir: "/opt/root-cern.d"
 
 root_package: "/tmp/{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}-root.tar.gz"
 
-centos_compiler_package: gcc
+centos_compiler: gcc
 
 centos_url: https://root.cern/download/root_v6.20.04.Linux-centos7-x86_64-gcc4.8.tar.gz
 
