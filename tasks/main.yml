@@ -1,0 +1,4 @@
+---
+# tasks file for cygno environment setup
+
+ - include: root-cern_install.yml

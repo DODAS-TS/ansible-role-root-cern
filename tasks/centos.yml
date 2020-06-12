@@ -1,0 +1,41 @@
+---
+- name: "Check {{ centos_compiler }} is installed"
+  yum:
+    name: "{{ centos_compile }}"
+    state: present
+  become: True
+  when: ansible_distribution == "centos"
+
+- name: "Create dest folder"
+  file:
+    path: "{{ root_cern_dir }}"
+    state: directory 
+
+- name: "Download Fedora 31 package"
+  get_url:
+    url: "{{ fedora31_url }}"
+    dest: "{{ root_package }}"
+  when:
+    - ansible_distribution_version ==  "31"
+
+- name: "Download ROOT package"
+  get_url:
+    url: "{{ centos_url }}"
+    dest: "{{ root_package }}"
+  when:
+    - ansible_distribution == "centos"
+
+- name: "Unarchive package"
+  unarchive:
+    src: "{{ root_package }}" 
+    dest: "{{ cern_root_dir }}"
+
+- name: "Load ROOT environment variables for BASH"
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    line: 'source {{ cern_root_dir }}/root/bin/thisroot.sh'
+    state: present
+    create: yes
+  when: 
+    - ansible_user_shell == "/bin/bash"
+
