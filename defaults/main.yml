@@ -1,6 +1,6 @@
 root_user: cloudadm
 
-cern_root_dir: "{{ root_user}}/.local/opt/root-cern.d"
+cern_root_dir: "{{ root_user }}/.local/opt/root-cern.d"
 
 root_package: "/tmp/{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}-root.tar.gz"
 
