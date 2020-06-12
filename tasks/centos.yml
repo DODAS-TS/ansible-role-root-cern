@@ -4,26 +4,16 @@
     name: "{{ centos_compile }}"
     state: present
   become: True
-  when: ansible_distribution == "centos"
 
 - name: "Create dest folder"
   file:
-    path: "{{ root_cern_dir }}"
+    path: "{{ cern_root_dir }}"
     state: directory 
-
-- name: "Download Fedora 31 package"
-  get_url:
-    url: "{{ fedora31_url }}"
-    dest: "{{ root_package }}"
-  when:
-    - ansible_distribution_version ==  "31"
 
 - name: "Download ROOT package"
   get_url:
     url: "{{ centos_url }}"
     dest: "{{ root_package }}"
-  when:
-    - ansible_distribution == "centos"
 
 - name: "Unarchive package"
   unarchive:
