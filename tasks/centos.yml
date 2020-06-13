@@ -1,9 +1,4 @@
 ---
-- name: update alternatives set python3.6
-  command: 
-    yum -y update
-  become: true 
-
 #- name: Update all packages first
 #  yum:
 #    name: '*'
