@@ -20,6 +20,7 @@
       - libXpm-devel 
       - libXft-devel 
       - libXext-devel
+      - libzstd
     state: present
   vars:
     ansible_python_interpreter: /usr/bin/python2.7
@@ -47,24 +48,21 @@
     - dest_folder_created
   register: root_unarchive
 
-- name: "Load ROOT environment variables for BASH"
-  lineinfile:
-    path: "/home/{{ root_cern_user }}/.bashrc"
-    line: 'source {{ cern_root_dir }}/root/bin/thisroot.sh'
-    state: present
-    create: yes
-  when: 
-    - ansible_user_shell == "/bin/bash"
+- name: source cern root env file 
+  shell: "source {{ cern_root_dir }}/root/bin/thisroot.sh"
+  register: root_env 
+  args:
+    executable: /bin/bash
+  when:
     - required_packages_install
     - root_unarchive
-
-- name: "Load ROOT environment variables for BASH"
+      
+- name: populate /etc/environment
   lineinfile:
-    path: "/root/.bashrc"
-    line: 'source {{ cern_root_dir }}/root/bin/thisroot.sh'
+    dest: "/etc/environment"
     state: present
-    create: yes
-  when: 
-    - ansible_user_shell == "/bin/bash"
-    - required_packages_install
-    - root_unarchive
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }}={{ item.value}}"
+  with_items: "{{ os_environment }}"
+  when:
+    - root_env
