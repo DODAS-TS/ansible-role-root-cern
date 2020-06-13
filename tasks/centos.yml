@@ -1,13 +1,17 @@
 ---
+- name: update alternatives set python3.6
+  command: 
+    yum -y update
+  become: true 
 
-- name: Update all packages first
-  yum:
-    name: '*'
-    state: latest
-    update_cache: true
-  become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python2.7
+#- name: Update all packages first
+#  yum:
+#    name: '*'
+#    state: latest
+#    update_cache: true
+#  become: true
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python2.7
 
 - name: "Check required packages are installed"
   yum:
