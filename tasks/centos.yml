@@ -1,24 +1,52 @@
 ---
-- name: "Check {{ centos_compiler }} is installed"
+
+- name: Update all packages first
   yum:
-    name: "{{ centos_compiler }}"
+    name: '*'
+    state: latest
+    update_cache: true
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python2.7
+
+- name: "Check required packages are installed"
+  yum:
+    name:
+      - git
+      - cmake 
+      - gcc-c++ 
+      - gcc
+      - binutils 
+      - libX11-devel 
+      - libXpm-devel 
+      - libXft-devel 
+      - libXext-devel
     state: present
+  vars:
+    ansible_python_interpreter: /usr/bin/python2.7
   become: True
+  register: required_packages_install
 
 - name: "Create dest folder"
   file:
     path: "{{ cern_root_dir }}"
     state: directory 
+  register: dest_folder_created
 
 - name: "Download ROOT package"
   get_url:
     url: "{{ centos_url }}"
     dest: "{{ root_package }}"
+  register: root_cern_download
 
 - name: "Unarchive package"
   unarchive:
     src: "{{ root_package }}" 
     dest: "{{ cern_root_dir }}"
+  when:
+    - root_cern_download
+    - dest_folder_created
+  register: root_unarchive
 
 - name: "Load ROOT environment variables for BASH"
   lineinfile:
@@ -28,4 +56,16 @@
     create: yes
   when: 
     - ansible_user_shell == "/bin/bash"
+    - required_packages_install
+    - root_unarchive
 
+- name: "Load ROOT environment variables for BASH"
+  lineinfile:
+    path: "/root/.bashrc"
+    line: 'source {{ cern_root_dir }}/root/bin/thisroot.sh'
+    state: present
+    create: yes
+  when: 
+    - ansible_user_shell == "/bin/bash"
+    - required_packages_install
+    - root_unarchive
