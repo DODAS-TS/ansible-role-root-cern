@@ -8,22 +8,22 @@ centos_url: https://root.cern/download/root_v6.20.04.Linux-centos7-x86_64-gcc4.8
 
 cern_root_environment:
  - key: MANPATH
-   value : "{{ lookup('env', 'MANPATH') }}"
+   value : "{{ cern_root_dir }}/root/man"
  - key: LD_LIBRARY_PATH
-   value : "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
+   value : "{{ cern_root_dir }}/root/lib"
  - key: LIBPATH
-   value : "{{ lookup('env', 'LIBPATH') }}"
+   value : "{{ cern_root_dir }}/root/lib"
  - key: JUPYTER_PATH
-   value : "{{ lookup('env', 'JUPYTER_PATH') }}"
+   value : "{{ cern_root_dir }}/root/etc/notebook"
  - key: PATH
-   value : "{{ lookup('env', 'PATH') }}"
+   value : "{{ cern_root_dir }}/rootn:/{{ lookup('env', 'PATH') }}"
  - key: ROOTSYS
-   value : "{{ lookup('env', 'ROOTSYS') }}"
+   value : "{{ cern_root_dir }}/root"
  - key: DYLD_LIBRARY_PATH
-   value : "{{ lookup('env', 'DYLD_LIBRARY_PATH') }}"
+   value : "{{ cern_root_dir }}/root/lib"
  - key: PYTHONPATH
-   value : "{{ lookup('env', 'PYTHONPATH') }}"
+   value : "{{ cern_root_dir }}/root/lib"
  - key: SHLIB_PATH
-   value : "{{ lookup('env', 'SHLIB_PATH') }}"
+   value : "{{ cern_root_dir }}/root/lib"
  - key: CMAKE_PREFIX_PATH
-   value : "{{ lookup('env', 'CMAKE_PREFIX_PATH') }}"
+   value : "{{ cern_root_dir }}/root"
