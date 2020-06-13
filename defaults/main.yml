@@ -8,22 +8,22 @@ centos_url: https://root.cern/download/root_v6.20.04.Linux-centos7-x86_64-gcc4.8
 
 cern_root_environment:
  - key: MANPATH
- - value : "{{ lookup('env', 'MANPATH' }}"
+ - value : "{{ lookup('env', 'MANPATH') }}"
  - key: LD_LIBRARY_PATH
- - value : "{{ lookup('env', 'LD_LIBRARY_PATH' }}"
+ - value : "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
  - key: LIBPATH
- - value : "{{ lookup('env', 'LIBPATH' }}"
+ - value : "{{ lookup('env', 'LIBPATH') }}"
  - key: JUPYTER_PATH
- - value : "{{ lookup('env', 'JUPYTER_PATH' }}"
+ - value : "{{ lookup('env', 'JUPYTER_PATH') }}"
  - key: PATH
- - value : "{{ lookup('env', 'PATH' }}"
+ - value : "{{ lookup('env', 'PATH') }}"
  - key: ROOTSYS
- - value : "{{ lookup('env', 'ROOTSYS' }}"
+ - value : "{{ lookup('env', 'ROOTSYS') }}"
  - key: DYLD_LIBRARY_PATH
- - value : "{{ lookup('env', 'DYLD_LIBRARY_PATH' }}"
+ - value : "{{ lookup('env', 'DYLD_LIBRARY_PATH') }}"
  - key: PYTHONPATH
- - value : "{{ lookup('env', 'PYTHONPATH' }}"
+ - value : "{{ lookup('env', 'PYTHONPATH') }}"
  - key: SHLIB_PATH
- - value : "{{ lookup('env', 'SHLIB_PATH' }}"
+ - value : "{{ lookup('env', 'SHLIB_PATH') }}"
  - key: CMAKE_PREFIX_PATH
- - value : "{{ lookup('env', 'CMAKE_PREFIX_PATH' }}"
+ - value : "{{ lookup('env', 'CMAKE_PREFIX_PATH') }}"
