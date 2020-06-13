@@ -63,6 +63,6 @@
     state: present
     regexp: "^{{ item.key }}"
     line: "{{ item.key }}={{ item.value}}"
-  with_items: "{{ os_environment }}"
+  with_items: "{{ cern_root_environment }}"
   when:
     - root_env
