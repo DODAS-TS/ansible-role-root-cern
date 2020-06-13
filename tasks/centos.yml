@@ -21,6 +21,7 @@
       - libXft-devel 
       - libXext-devel
       - libzstd
+      - python36-devel
     state: present
   vars:
     ansible_python_interpreter: /usr/bin/python2.7

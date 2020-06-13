@@ -16,7 +16,7 @@ cern_root_environment:
  - key: JUPYTER_PATH
    value : "{{ cern_root_dir }}/root/etc/notebook"
  - key: PATH
-   value : "{{ cern_root_dir }}/root:/{{ lookup('env', 'PATH') }}"
+   value : "{{ cern_root_dir }}/root/bin:{{ lookup('env', 'PATH') }}"
  - key: ROOTSYS
    value : "{{ cern_root_dir }}/root"
  - key: DYLD_LIBRARY_PATH
